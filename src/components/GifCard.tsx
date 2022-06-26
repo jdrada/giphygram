@@ -1,22 +1,15 @@
-import axios from "axios";
+import { position } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
-const GifCard = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const results = axios("https://api.giphy.com/v1/gifs/trending", {
-        params: {
-          api_key: "5mjiA0lqt5ZKgi270auAuqv5dvOMjrD9",
-        },
-      });
-
-      console.log(results);
-    };
-
-    fetchData();
-  });
-
-  return <div>GifCard</div>;
+const GifCard = ({ gif }: any) => {
+  return (
+    <div>
+      <img src={gif.images.original.url} alt="loading..." />
+      <div>
+        <button onClick={() => console.log(gif.title)}>favorito</button>
+      </div>
+    </div>
+  );
 };
 
 export default GifCard;
