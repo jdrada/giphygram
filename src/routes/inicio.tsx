@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import GifCard from "../components/GifCard";
 import { GiphyController } from "../services/giphy.service";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Container } from "@chakra-ui/react";
 
 export default function Inicio() {
   const [gifs, setGifs] = useState<any[]>([]);
@@ -35,22 +36,23 @@ export default function Inicio() {
   return (
     <main style={{ padding: "1rem 0" }}>
       <h1>Inicio holi</h1>
-      <InfiniteScroll
-        dataLength={gifs.length}
-        next={fetchMoreData}
-        hasMore={true}
-        loader={<h4>Loading...</h4>}
-        height={400}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
-          </p>
-        }
-      >
-        {gifs.map((gif) => (
-          <GifCard key={gif.id} gif={gif}></GifCard>
-        ))}
-      </InfiniteScroll>
+      <Container>
+        <InfiniteScroll
+          dataLength={gifs.length}
+          next={fetchMoreData}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
+        >
+          {gifs.map((gif) => (
+            <GifCard key={gif.id} gif={gif}></GifCard>
+          ))}
+        </InfiniteScroll>
+      </Container>
     </main>
   );
 }
