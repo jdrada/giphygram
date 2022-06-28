@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { FiHelpCircle, FiMenu, FiSearch, FiSettings } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { Logo } from "./Logo";
 
 export const NavBar = () => {
@@ -30,6 +31,7 @@ export const NavBar = () => {
               {isDesktop && (
                 <ButtonGroup variant="ghost" spacing="1">
                   <Button>Home</Button>
+                  <Link to={'search'}>Buscar</Link>
                   <Button aria-current="page">Dashboard</Button>
                   <Button>Tasks</Button>
                   <Button>Bookmarks</Button>

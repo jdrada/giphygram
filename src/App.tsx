@@ -4,7 +4,7 @@ import Favorites from "./routes/Favorites";
 import Inicio from "./routes/inicio";
 import Search from "./routes/Search";
 import Visitados from "./routes/visitados";
-import Gif from "./routes/gif";
+import { Detail } from "./routes/Detalle";
 import { NavBar } from "./components/NavBar";
 
 export default function App() {
@@ -17,8 +17,8 @@ export default function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/visitados" element={<Visitados />} />
-          <Route path="/gif" element={<Gif />}>
-            <Route path=":gifId" element={<Gif />} />
+          <Route path="/gif" element={<Detail />}>
+            <Route path=":gifId" element={<Detail />} />
           </Route>
           <Route
             path="*"
