@@ -18,9 +18,13 @@ const Search = () => {
         10,
         counter * 10
       );
-      const newGifs = await gifsResponse;
+      let newGifs = await gifsResponse;
+      newGifs = newGifs.map((gif: any) => {
+        gif.url = gif.images.original.url;
+        console.log(gif);
+        return gif;
+      });
       setGifs((oldGifs: any) => [...oldGifs, ...newGifs]);
-      console.log(newGifs);
       setIsFetching(false);
       setCounter((oldCounter) => oldCounter + 1);
       setBlockRequest(true);

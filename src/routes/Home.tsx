@@ -1,11 +1,10 @@
+import { Container } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useSelector } from "react-redux";
 import GifCard from "../components/GifCard";
 import { GiphyController } from "../services/giphy.service";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Container } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { title } from "process";
 
 const Home = () => {
   const [gifs, setGifs] = useState<any[]>([]);
@@ -16,7 +15,12 @@ const Home = () => {
   const fetchMoreData = async () => {
     if (!blockRequest) {
       const gifsResponse = GiphyController.getTrending(10, counter * 10);
-      const newGifs = await gifsResponse;
+      let newGifs = await gifsResponse;
+      newGifs = newGifs.map((gif: any) => {
+        gif.url = gif.images.original.url;
+        console.log(gif);
+        return gif;
+      });
       setGifs((oldGifs) => [...oldGifs, ...newGifs]);
       setIsFetching(false);
       setCounter((oldCounter) => oldCounter + 1);
@@ -27,8 +31,12 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const gifsResponse = GiphyController.getTrending();
-      console.log(await gifsResponse);
-      setGifs(await gifsResponse);
+      let newGifs = await gifsResponse;
+      newGifs = newGifs.map((gif: any) => {
+        gif.url = gif.images.original.url;
+        return gif;
+      });
+      setGifs(await newGifs);
     };
     if (isFetching) fetchData();
     setTimeout(() => {
@@ -36,23 +44,13 @@ const Home = () => {
     }, 3000);
   }, [isFetching]);
 
-  //----
-
   const favGifState = useSelector(
     (state: RootState) => state.addFav.favoriteGifs
   );
 
-  console.log(favGifState);
-
   return (
     <main style={{ padding: "1rem 0" }}>
-      <h1>Inicio holi</h1>
-      <li>
-        {favGifState.map((fav) => (
-          <GifCard key={fav.key} gif={fav}></GifCard>
-        ))}
-      </li>
-      {/* <Container>
+      <Container>
         <InfiniteScroll
           dataLength={gifs.length}
           next={fetchMoreData}
@@ -64,11 +62,10 @@ const Home = () => {
             </p>
           }
         >
-          {gifs.map((gif) => (
-            <GifCard key={gif.key} gif={gif}></GifCard>
-          ))}
+          {gifs &&
+            gifs.map((gif, index) => <GifCard key={index} gif={gif}></GifCard>)}
         </InfiniteScroll>
-      </Container> */}
+      </Container>
     </main>
   );
 };
