@@ -30,8 +30,9 @@ export const NavBar = () => {
               <Logo />
               {isDesktop && (
                 <ButtonGroup variant="ghost" spacing="1">
-                  <Button>Home</Button>
-                  <Link to={'search'}>Buscar</Link>
+                  <Link to={"/"}>Home</Link>
+                  <Link to={"search"}>Buscar</Link>
+                  <Link to={"Favorites"}>favoritos</Link>
                   <Button aria-current="page">Dashboard</Button>
                   <Button>Tasks</Button>
                   <Button>Bookmarks</Button>

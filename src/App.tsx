@@ -1,11 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { NavBar } from "./components/NavBar";
 import Favorites from "./routes/Favorites";
-import Inicio from "./routes/inicio";
+import Inicio from "./routes/Home";
 import Search from "./routes/Search";
 import Visitados from "./routes/visitados";
-import { Detail } from "./routes/Detalle";
-import { NavBar } from "./components/NavBar";
+import Detail from "./routes/Detail";
 
 export default function App() {
   return (
@@ -17,7 +17,7 @@ export default function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/visitados" element={<Visitados />} />
-          <Route path="/gif" element={<Detail />}>
+          <Route path="/detail" element={<Detail />}>
             <Route path=":gifId" element={<Detail />} />
           </Route>
           <Route
