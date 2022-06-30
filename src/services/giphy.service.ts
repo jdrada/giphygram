@@ -9,7 +9,6 @@ export const GiphyController = {
         offset,
       },
     });
-
     return results.data.data;
   },
 

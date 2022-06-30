@@ -3,8 +3,11 @@ import GifCard from "../components/GifCard";
 import { GiphyController } from "../services/giphy.service";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Container } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { title } from "process";
 
-export default function Inicio() {
+const Home = () => {
   const [gifs, setGifs] = useState<any[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [counter, setCounter] = useState<number>(1);
@@ -33,10 +36,23 @@ export default function Inicio() {
     }, 3000);
   }, [isFetching]);
 
+  //----
+
+  const favGifState = useSelector(
+    (state: RootState) => state.addFav.favoriteGifs
+  );
+
+  console.log(favGifState);
+
   return (
     <main style={{ padding: "1rem 0" }}>
       <h1>Inicio holi</h1>
-      <Container>
+      <li>
+        {favGifState.map((fav) => (
+          <GifCard key={fav.key} gif={fav}></GifCard>
+        ))}
+      </li>
+      {/* <Container>
         <InfiniteScroll
           dataLength={gifs.length}
           next={fetchMoreData}
@@ -49,10 +65,12 @@ export default function Inicio() {
           }
         >
           {gifs.map((gif) => (
-            <GifCard key={gif.id} gif={gif}></GifCard>
+            <GifCard key={gif.key} gif={gif}></GifCard>
           ))}
         </InfiniteScroll>
-      </Container>
+      </Container> */}
     </main>
   );
-}
+};
+
+export default Home;
