@@ -1,23 +1,16 @@
-import { Button, Box, Center, Img } from "@chakra-ui/react";
-import { addFavActions } from "../store/addfav-slice";
+import { Box, Button, Center, Img } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
+import { addFavActions } from "../store/addfav-slice";
 
 const GifCard = ({ gif }: any) => {
-  const gifData = {
-    key: gif.id,
-    id: gif.id,
-    title: gif.title,
-    url: gif.images.original.url,
-  };
-
   const dispatch = useDispatch();
   const onFavoriteHandler = () => {
     dispatch(
       addFavActions.addFavGif({
-        key: gifData.key,
-        id: gifData.id,
-        title: gifData.title,
-        url: gifData.url,
+        key: gif.key,
+        id: gif.id,
+        title: gif.title,
+        url: gif.url,
       })
     );
     dispatch(addFavActions.isFavorite());
@@ -34,7 +27,7 @@ const GifCard = ({ gif }: any) => {
     >
       <Center m={4} display="flex" alignItems="baseline">
         <Img
-          src={gifData.url}
+          src={gif.url}
           alt="loading..."
           objectFit="cover"
           onClick={() => console.log(gif.title)}
