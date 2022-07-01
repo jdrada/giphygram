@@ -51,7 +51,7 @@ const Search = () => {
   useEffect(() => {}, [gifs]);
 
   return (
-    <main style={{ padding: "1rem 0" }}>
+    <main>
       <Container>
         <Center>
           <Input

@@ -7,7 +7,7 @@ const Viewed = () => {
   const gifs = useSelector((state: RootState) => state.addViewed.viewedGifs);
 
   return (
-    <Container>
+    <Container paddingTop={6}>
       {gifs.length > 0 ? (
         <div>
           {gifs.map((gif) => (
@@ -17,7 +17,7 @@ const Viewed = () => {
       ) : (
         <Center
           boxShadow="sm"
-          mb={6}
+          m={6}
           p={6}
           maxW="lg"
           borderWidth="1px"
