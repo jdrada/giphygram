@@ -7,7 +7,6 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useSelector } from "react-redux";
 import GifCard from "../components/GifCard";
 import { IGif } from "../interfaces/IGif";
 import { GiphyController } from "../services/giphy.service";
