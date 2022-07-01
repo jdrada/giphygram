@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Center, CircularProgress, Container, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
@@ -49,16 +49,16 @@ const Home = () => {
   );
 
   return (
-    <main style={{ padding: "1rem 0" }}>
+    <main>
       <Container>
         <InfiniteScroll
           dataLength={gifs.length}
           next={fetchMoreData}
           hasMore={true}
-          loader={<h4>Loading...</h4>}
+          loader={<CircularProgress isIndeterminate color="teal" />}
           endMessage={
             <p style={{ textAlign: "center" }}>
-              <b>Yay! You have seen it all</b>
+              <b>Los Haz visto todos!</b>
             </p>
           }
         >

@@ -1,11 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
-import Favorites from "./routes/Favorites";
-import Inicio from "./routes/Home";
-import Search from "./routes/Search";
-import Visitados from "./routes/visitados";
-import Detail from "./routes/Detail";
+import Favorites from "./pages/Favorites";
+import Home from "./pages/Home";
+import Search from "./pages/Search";
+import GifDetail from "./pages/GifDetail";
+import Viewed from "./pages/Viewed";
 
 export default function App() {
   return (
@@ -13,21 +13,13 @@ export default function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" element={<Inicio />} />
+          <Route path="/" element={<Navigate replace to="/home" />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/search" element={<Search />} />
           <Route path="/favorites" element={<Favorites />} />
-          <Route path="/visitados" element={<Visitados />} />
-          <Route path="/detail" element={<Detail />}>
-            <Route path=":gifId" element={<Detail />} />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
+          <Route path="/viewed" element={<Viewed />} />
+          <Route path="/gif-detail/:gifId" element={<GifDetail />}></Route>
+          <Route path="*" element={<Navigate replace to="/home" />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

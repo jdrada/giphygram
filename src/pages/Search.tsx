@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Box, Button, Center, Container, Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import GifCard from "../components/GifCard";
@@ -10,8 +10,10 @@ const Search = () => {
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [counter, setCounter] = useState<number>(1);
   const [blockRequest, setBlockRequest] = useState<boolean>(false);
+  const [uiFeedback, setUiFeedback] = useState(false);
 
   const fetchMoreData = async () => {
+    setUiFeedback(!uiFeedback);
     if (!blockRequest) {
       const gifsResponse = GiphyController.searchGifs(
         searchInput,
@@ -21,7 +23,7 @@ const Search = () => {
       let newGifs = await gifsResponse;
       newGifs = newGifs.map((gif: any) => {
         gif.url = gif.images.original.url;
-        console.log(gif);
+
         return gif;
       });
       setGifs((oldGifs: any) => [...oldGifs, ...newGifs]);
@@ -48,31 +50,44 @@ const Search = () => {
 
   return (
     <main style={{ padding: "1rem 0" }}>
-      <div>
-        <div>
-          <input onChange={searchHandler} type="text" />
-          <button onClick={searchGifs}>Buscar</button>
-        </div>
-        <div>
-          <Container>
-            <InfiniteScroll
-              dataLength={gifs.length}
-              next={fetchMoreData}
-              hasMore={true}
-              loader={<h4>Loading...</h4>}
-              endMessage={
-                <p style={{ textAlign: "center" }}>
-                  <b>Yay! You have seen it all</b>
-                </p>
-              }
-            >
-              {gifs.map((gif: any) => (
-                <GifCard key={gif.id} gif={gif}></GifCard>
-              ))}
-            </InfiniteScroll>
-          </Container>
-        </div>
-      </div>
+      <Container>
+        <Center>
+          <Input
+            type="text"
+            marginEnd={6}
+            size="lg"
+            placeholder="Busca Gifs"
+            onChange={searchHandler}
+          />
+
+          <Button
+            onClick={searchGifs}
+            colorScheme="blackAlpha"
+            size="lg"
+            variant="outline"
+          >
+            Buscar
+          </Button>
+        </Center>
+
+        <Box paddingTop={6}>
+          <InfiniteScroll
+            dataLength={gifs.length}
+            next={fetchMoreData}
+            hasMore={true}
+            loader={""}
+            endMessage={
+              <p style={{ textAlign: "center" }}>
+                <b>¡Los has visto todos!</b>
+              </p>
+            }
+          >
+            {gifs.map((gif: any) => (
+              <GifCard key={gif.id} gif={gif}></GifCard>
+            ))}
+          </InfiniteScroll>
+        </Box>
+      </Container>
     </main>
   );
 };
