@@ -1,4 +1,4 @@
-import { Center, CircularProgress, Container, Text } from "@chakra-ui/react";
+import { CircularProgress, Container } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSelector } from "react-redux";
@@ -63,10 +63,7 @@ const Home = () => {
           }
         >
           {gifs &&
-              gifs.map((gif, index) => (
-                <GifCard key={index} gif={gif}></GifCard>
-              ))
-          }
+            gifs.map((gif, index) => <GifCard key={index} gif={gif}></GifCard>)}
         </InfiniteScroll>
       </Container>
     </main>

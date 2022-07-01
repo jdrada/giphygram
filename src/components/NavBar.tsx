@@ -1,21 +1,21 @@
+import { HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   ButtonGroup,
+  Center,
   Container,
   Flex,
   HStack,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
   useBreakpointValue,
   useColorModeValue,
-  Text,
-  Center,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Menu,
 } from "@chakra-ui/react";
-import { HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 
 import { NavLink } from "react-router-dom";
 
