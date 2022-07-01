@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Box,
   Button,
   ButtonGroup,
@@ -9,11 +8,16 @@ import {
   IconButton,
   useBreakpointValue,
   useColorModeValue,
+  Text,
+  Center,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  Menu,
 } from "@chakra-ui/react";
+import { HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 
-import { FiHelpCircle, FiMenu, FiSearch, FiSettings } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { Logo } from "./Logo";
+import { NavLink } from "react-router-dom";
 
 export const NavBar = () => {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
@@ -24,51 +28,76 @@ export const NavBar = () => {
         bg="bg-surface"
         boxShadow={useColorModeValue("sm", "sm-dark")}
       >
-        <Container py={{ base: "3", lg: "4" }}>
-          <Flex justify="space-between">
-            <HStack spacing="4">
-              <Logo />
+        <Container>
+          <Flex
+            pos="relative"
+            as="header"
+            align="center"
+            position="fixed"
+            backgroundColor="rgba(255, 255, 255, 0.9)"
+            backdropFilter="saturate(180%) blur(5px)"
+            w="100%"
+          >
+            <HStack>
+              <NavLink to={"/"}>
+                <Center>
+                  <Text fontSize="4xl" as="b">
+                    Giphy
+                  </Text>
+                  <Text
+                    bgGradient="linear(to-l, #7928CA, #FF0080)"
+                    bgClip="text"
+                    fontSize="4xl"
+                    as="b"
+                  >
+                    gram
+                  </Text>
+                  <StarIcon boxSize={5} />
+                </Center>
+              </NavLink>
+              {!isDesktop && (
+                <Menu>
+                  <MenuButton
+                    align="center"
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<HamburgerIcon />}
+                    variant="outline"
+                    fontSize="4xl"
+                  />
+                  <MenuList>
+                    <NavLink to={"/"}>
+                      <MenuItem>Inicio</MenuItem>
+                    </NavLink>
+                    <NavLink to={"search"}>
+                      <MenuItem>Buscar</MenuItem>
+                    </NavLink>
+                    <NavLink to={"favorites"}>
+                      <MenuItem>Favoritos</MenuItem>
+                    </NavLink>
+                    <NavLink to={"viewed"}>
+                      <MenuItem>Visitados</MenuItem>
+                    </NavLink>
+                  </MenuList>
+                </Menu>
+              )}
               {isDesktop && (
-                <ButtonGroup variant="ghost" spacing="1">
-                  <Link to={"/"}>Home</Link>
-                  <Link to={"search"}>Buscar</Link>
-                  <Link to={"Favorites"}>favoritos</Link>
-                  <Button aria-current="page">Dashboard</Button>
-                  <Button>Tasks</Button>
-                  <Button>Bookmarks</Button>
-                  <Button>Users</Button>
+                <ButtonGroup variant="ghost">
+                  <NavLink to={"/"}>
+                    <Button>Inicio</Button>
+                  </NavLink>
+                  <NavLink to={"search"}>
+                    <Button>Buscar</Button>
+                  </NavLink>
+                  <NavLink to={"favorites"}>
+                    <Button>Favoritos</Button>
+                  </NavLink>
+                  <NavLink to={"viewed"}>
+                    <Button>Visitados</Button>
+                  </NavLink>
                 </ButtonGroup>
               )}
             </HStack>
-            {isDesktop ? (
-              <HStack spacing="4">
-                <ButtonGroup variant="ghost" spacing="1">
-                  <IconButton
-                    icon={<FiSearch fontSize="1.25rem" />}
-                    aria-label="Search"
-                  />
-                  <IconButton
-                    icon={<FiSettings fontSize="1.25rem" />}
-                    aria-label="Settings"
-                  />
-                  <IconButton
-                    icon={<FiHelpCircle fontSize="1.25rem" />}
-                    aria-label="Help Center"
-                  />
-                </ButtonGroup>
-                <Avatar
-                  boxSize="10"
-                  name="Christoph Winston"
-                  src="https://tinyurl.com/yhkm2ek8"
-                />
-              </HStack>
-            ) : (
-              <IconButton
-                variant="ghost"
-                icon={<FiMenu fontSize="1.25rem" />}
-                aria-label="Open Menu"
-              />
-            )}
           </Flex>
         </Container>
       </Box>
