@@ -7,7 +7,7 @@ const Favorites = () => {
   const gifs = useSelector((state: RootState) => state.addFav.favoriteGifs);
 
   return (
-    <Container>
+    <Container paddingTop={6}>
       {gifs.length > 0 ? (
         <div>
           {gifs.map((gif) => (
