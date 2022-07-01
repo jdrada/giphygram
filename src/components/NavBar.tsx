@@ -1,5 +1,6 @@
 import { HamburgerIcon, StarIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
   Box,
   Button,
   ButtonGroup,
@@ -23,19 +24,13 @@ export const NavBar = () => {
   const isDesktop = useBreakpointValue({ base: false, lg: true });
   return (
     <Box as="section" pb={{ base: "12", md: "24" }}>
-      <Box
-        as="nav"
-        bg="bg-surface"
-        boxShadow={useColorModeValue("sm", "sm-dark")}
-      >
+      <Box as="nav" bg="white" boxShadow={useColorModeValue("sm", "sm-dark")}>
         <Container>
           <Flex
-            pos="relative"
-            as="header"
-            align="center"
+            pos="absolute"
             position="fixed"
-            backgroundColor="rgba(255, 255, 255, 0.9)"
-            backdropFilter="saturate(180%) blur(5px)"
+            justify="space-between"
+            backgroundColor="white"
             w="100%"
           >
             <HStack>
@@ -55,6 +50,7 @@ export const NavBar = () => {
                   <StarIcon boxSize={5} />
                 </Center>
               </NavLink>
+
               {!isDesktop && (
                 <Menu>
                   <MenuButton
@@ -97,6 +93,14 @@ export const NavBar = () => {
                   </NavLink>
                 </ButtonGroup>
               )}
+              <a href="https://github.com/jdrada/giphygram.git">
+                <Avatar
+                  boxSize="10"
+                  name="Christoph Winston"
+                  src="https://avatars.githubusercontent.com/u/98852378?v=4"
+                />
+              </a>
+              <Text as="sub"> by: JDrada</Text>
             </HStack>
           </Flex>
         </Container>
