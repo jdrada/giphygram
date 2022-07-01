@@ -30,7 +30,7 @@ export const NavBar = () => {
       >
         <Container>
           <Flex
-            pos="relative"
+            pos="absolute"
             as="header"
             align="center"
             position="fixed"

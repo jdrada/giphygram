@@ -18,6 +18,7 @@ const Search = () => {
   const [gifs, setGifs] = useState<IGif[]>([]);
   const [counter, setCounter] = useState<number>(1);
   const [uiFeedback, setUiFeedback] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   const fetchMoreData = async () => {
     setUiFeedback(!uiFeedback);
@@ -42,6 +43,7 @@ const Search = () => {
   };
 
   const searchGifs = async () => {
+    setShowResults(true);
     setGifs([]);
     await fetchMoreData();
   };
@@ -70,30 +72,32 @@ const Search = () => {
           </Button>
         </Center>
 
-        <Box paddingTop={6}>
-          <InfiniteScroll
-            dataLength={gifs.length}
-            next={fetchMoreData}
-            hasMore={true}
-            loader={
-              <Stack>
-                <Skeleton height="20px" />
-                <Skeleton height="20px" />
-                <Skeleton height="20px" />
-                <Skeleton height="20px" />
-              </Stack>
-            }
-            endMessage={
-              <p style={{ textAlign: "center" }}>
-                <b>¡Los has visto todos!</b>
-              </p>
-            }
-          >
-            {gifs.map((gif: any) => (
-              <GifCard key={gif.id} gif={gif}></GifCard>
-            ))}
-          </InfiniteScroll>
-        </Box>
+        {showResults && (
+          <Box paddingTop={6}>
+            <InfiniteScroll
+              dataLength={gifs.length}
+              next={fetchMoreData}
+              hasMore={true}
+              loader={
+                <Stack>
+                  <Skeleton height="20px" />
+                  <Skeleton height="20px" />
+                  <Skeleton height="20px" />
+                  <Skeleton height="20px" />
+                </Stack>
+              }
+              endMessage={
+                <p style={{ textAlign: "center" }}>
+                  <b>¡Los has visto todos!</b>
+                </p>
+              }
+            >
+              {gifs.map((gif: any) => (
+                <GifCard key={gif.id} gif={gif}></GifCard>
+              ))}
+            </InfiniteScroll>
+          </Box>
+        )}
       </Container>
     </main>
   );
