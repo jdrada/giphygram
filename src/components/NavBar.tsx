@@ -67,16 +67,16 @@ export const NavBar = () => {
                   />
                   <MenuList>
                     <NavLink to={"/"}>
-                      <MenuItem>Inicio</MenuItem>{" "}
-                    </NavLink>{" "}
+                      <MenuItem>Inicio</MenuItem>
+                    </NavLink>
                     <NavLink to={"search"}>
                       <MenuItem>Buscar</MenuItem>
-                    </NavLink>{" "}
+                    </NavLink>
                     <NavLink to={"favorites"}>
                       <MenuItem>Favoritos</MenuItem>
-                    </NavLink>{" "}
+                    </NavLink>
                     <NavLink to={"viewed"}>
-                      <MenuItem>Vistos</MenuItem>
+                      <MenuItem>Visitados</MenuItem>
                     </NavLink>
                   </MenuList>
                 </Menu>

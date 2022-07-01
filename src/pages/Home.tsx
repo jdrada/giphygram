@@ -63,7 +63,10 @@ const Home = () => {
           }
         >
           {gifs &&
-            gifs.map((gif, index) => <GifCard key={index} gif={gif}></GifCard>)}
+              gifs.map((gif, index) => (
+                <GifCard key={index} gif={gif}></GifCard>
+              ))
+          }
         </InfiniteScroll>
       </Container>
     </main>
