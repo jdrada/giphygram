@@ -7,14 +7,12 @@ import { GiphyController } from "../services/giphy.service";
 const Search = () => {
   const [searchInput, setSearchInput] = useState("");
   const [gifs, setGifs] = useState<any>([]);
-  const [isFetching, setIsFetching] = useState<boolean>(true);
   const [counter, setCounter] = useState<number>(1);
-  const [blockRequest, setBlockRequest] = useState<boolean>(false);
   const [uiFeedback, setUiFeedback] = useState(false);
 
   const fetchMoreData = async () => {
     setUiFeedback(!uiFeedback);
-    if (!blockRequest) {
+    setTimeout(async () => {
       const gifsResponse = GiphyController.searchGifs(
         searchInput,
         10,
@@ -23,14 +21,11 @@ const Search = () => {
       let newGifs = await gifsResponse;
       newGifs = newGifs.map((gif: any) => {
         gif.url = gif.images.original.url;
-
         return gif;
       });
       setGifs((oldGifs: any) => [...oldGifs, ...newGifs]);
-      setIsFetching(false);
       setCounter((oldCounter) => oldCounter + 1);
-      setBlockRequest(true);
-    }
+    }, 3000);
   };
 
   const searchHandler = (event: any) => {
@@ -42,11 +37,7 @@ const Search = () => {
     await fetchMoreData();
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      setBlockRequest(false);
-    }, 3000);
-  }, [gifs]);
+  useEffect(() => {}, [gifs]);
 
   return (
     <main style={{ padding: "1rem 0" }}>
