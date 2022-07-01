@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
+import { Center, Container, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
+import { useParams } from "react-router-dom";
 import GifCard from "../components/GifCard";
-import { Box, Center, Container, Text } from "@chakra-ui/react";
+import { RootState } from "../store";
 
 const GifDetail = () => {
   const gifs = useSelector((state: RootState) => state.addViewed.viewedGifs);

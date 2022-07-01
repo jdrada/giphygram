@@ -1,9 +1,9 @@
 import { Box, Button, Center, Img } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { RootState } from "../store";
 import { addFavActions } from "../store/addfav-slice";
 import { addViewedActions } from "../store/addViewed-slice";
-import { RootState } from "../store";
 
 const GifCard = ({ gif }: any) => {
   const dispatch = useDispatch();
